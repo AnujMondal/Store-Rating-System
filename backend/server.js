@@ -21,6 +21,29 @@ app.get("/health", (req, res) => {
   res.json({ status: "OK", message: "Server is running" });
 });
 
+// One-time migration endpoint (remove after use)
+app.get("/api/migrate", async (req, res) => {
+  try {
+    const { exec } = require("child_process");
+    const util = require("util");
+    const execPromise = util.promisify(exec);
+    
+    const { stdout, stderr } = await execPromise("node src/migrations/runMigrations.js");
+    res.json({ 
+      success: true, 
+      message: "Migration completed",
+      output: stdout,
+      errors: stderr 
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      success: false, 
+      error: error.message,
+      details: error.toString()
+    });
+  }
+});
+
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
