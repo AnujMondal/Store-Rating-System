@@ -2,6 +2,15 @@
 
 A full-stack web application that allows users to submit ratings for stores registered on the platform. The application implements role-based access control with three different user roles: System Administrator, Normal User, and Store Owner.
 
+## 🚀 Live Demo
+
+**Frontend:** https://store-rating-system-production-6948.up.railway.app  
+**Backend API:** https://backend-production-0879.up.railway.app
+
+**Admin Credentials:**
+- Email: admin@example.com
+- Password: Admin@123
+
 ## Tech Stack
 
 ### Backend
