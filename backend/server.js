@@ -21,6 +21,17 @@ app.get("/health", (req, res) => {
   res.json({ status: "OK", message: "Server is running" });
 });
 
+// Debug endpoint to check users (remove after use)
+app.get("/api/debug/users", async (req, res) => {
+  try {
+    const pool = require("./src/config/database");
+    const result = await pool.query("SELECT id, name, email, role FROM users");
+    res.json({ users: result.rows, count: result.rows.length });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // One-time migration endpoint (remove after use)
 app.get("/api/migrate", async (req, res) => {
   try {
